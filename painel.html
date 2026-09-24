@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime | Painel de Controle</title>
+    <title>Studio Bella | Painel de Controle</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -17,20 +17,20 @@
         }
         .custom-modal-overlay.active { opacity: 1; visibility: visible; }
         .custom-modal {
-            background: #1A1A1A; border: 1px solid #333333; border-radius: 8px;
+            background: #FFFFFF; border: 1px solid #EAEAEA; border-radius: 8px;
             padding: 25px; width: 90%; max-width: 400px; text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 20px rgba(214, 51, 132, 0.15);
         }
-        .custom-modal h3 { color: #FFFFFF; font-size: 1.1rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .custom-modal p { color: #CCCCCC; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.4; }
+        .custom-modal h3 { color: #d63384; font-size: 1.1rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .custom-modal p { color: #555555; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.4; }
         .custom-modal input {
-            width: 100%; padding: 12px; background: #121212; border: 1px solid #444;
-            border-radius: 6px; color: #FFF; font-size: 1rem; margin-bottom: 20px; outline: none;
+            width: 100%; padding: 12px; background: #FAFAFA; border: 1px solid #DDD;
+            border-radius: 6px; color: #333; font-size: 1rem; margin-bottom: 20px; outline: none;
         }
         .custom-modal-buttons { display: flex; gap: 10px; }
         .custom-modal-btn { flex: 1; padding: 12px; border-radius: 6px; font-size: 0.95rem; font-weight: bold; cursor: pointer; border: none; text-transform: uppercase; transition: 0.2s; }
-        .btn-modal-cancelar { background: #2A2A2A; color: #FFFFFF; border: 1px solid #444; }
-        .btn-modal-confirmar { background: #FFFFFF; color: #000000; }
+        .btn-modal-cancelar { background: #EAEAEA; color: #333333; border: 1px solid #DDD; }
+        .btn-modal-confirmar { background: #d63384; color: #FFFFFF; }
     </style>
 </head>
 <body>
@@ -40,36 +40,38 @@
         <!-- Cabeçalho -->
         <header class="barber-header">
             <div class="brand-info">
-                <i class="fa-solid fa-scissors barber-icon" style="color: #D4AF37;"></i>
+                <div class="brand-logo-container" style="width: 55px; height: 55px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #d63384; margin: 0 auto 8px auto;">
+                    <i class="fa-solid fa-spa" style="color: #d63384; font-size: 1.3rem;"></i>
+                </div>
                 <div>
-                    <h1>Prime</h1>
-                    <p id="painel-subtitulo">Painel de Controle e Fechamento</p>
+                    <h1>Studio Bella</h1>
+                    <p id="painel-subtitulo">Painel de Controlo e Fechamento</p>
                 </div>
             </div>
         </header>
 
         <!-- Seção de Login por Input -->
         <section id="login-section" class="section">
-            <h2>Acesso ao Painel</h2>
+            <h2>Acesso Restrito ao Painel</h2>
             <div class="datetime-inputs">
                 <div class="input-group">
-                    <label for="login-usuario">Login:</label>
+                    <label for="login-usuario">Usuário (ex: ana, juliana, mariana, admin):</label>
                     <input type="text" id="login-usuario">
                 </div>
                 <div class="input-group">
                     <label for="login-senha">Senha:</label>
                     <input type="password" id="login-senha">
                 </div>
-                <button class="btn-primary-action" onclick="fazerLogin()">Entrar</button>
+                <button class="btn-primary-action" onclick="fazerLogin()" style="background-color: #d63384;">Entrar</button>
             </div>
         </section>
 
-        <!-- Seção da Agenda do Barbeiro -->
+        <!-- Seção da Agenda da Profissional -->
         <section id="dashboard-barbeiro" class="section" style="display: none;">
             <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
-                <h2 id="titulo-agenda-barbeiro" style="font-size: 1.1rem; margin: 0;">Minha Agenda</h2>
+                <h2 id="titulo-agenda-barbeiro" style="font-size: 1.1rem; margin: 0; color: #d63384;">Minha Agenda</h2>
                 <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <button onclick="abrirModalSenha()" class="btn-whatsapp" style="flex: 1; min-width: 110px; padding: 8px 6px; font-size: 0.75rem; background: #D4AF37; color: #000; text-align: center;">
+                    <button onclick="abrirModalSenha()" class="btn-whatsapp" style="flex: 1; min-width: 110px; padding: 8px 6px; font-size: 0.75rem; background: #d63384; color: #FFF; text-align: center;">
                         <i class="fa-solid fa-key"></i> Alterar Senha
                     </button>
                     <button onclick="carregarAgendamentos()" class="btn-whatsapp" style="flex: 1; min-width: 90px; padding: 8px 6px; font-size: 0.75rem; text-align: center;">
@@ -86,42 +88,42 @@
                 <input type="date" id="filter-date-barber" onclick="this.showPicker && this.showPicker()" onchange="carregarAgendamentos()">
             </div>
 
-            <!-- Card de Fechamento Individual do Barbeiro -->
-            <div style="background: #332B15; border: 2px solid #D4AF37; padding: 15px; border-radius: 10px; margin-bottom: 25px;">
-                <h3 style="color: #D4AF37; margin-bottom: 10px; font-size: 1.1rem;">
+            <!-- Card de Fechamento Individual -->
+            <div style="background: #FDF2F8; border: 2px solid #d63384; padding: 15px; border-radius: 10px; margin-bottom: 25px;">
+                <h3 style="color: #d63384; margin-bottom: 10px; font-size: 1.1rem;">
                     <i class="fa-solid fa-chart-pie"></i> Meu Fechamento do Dia
                 </h3>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.95rem; margin-bottom: 15px;">
-                    <div style="background: #1E1E1E; padding: 10px; border-radius: 6px;">
+                    <div style="background: #FFF; padding: 10px; border-radius: 6px; border: 1px solid #F3C6D8;">
                         <span style="color: #888; display: block; font-size: 0.8rem;">Atendimentos Concluídos</span>
-                        <strong id="barber-resumo-qtd" style="font-size: 1.2rem; color: #FFF;">0</strong>
+                        <strong id="barber-resumo-qtd" style="font-size: 1.2rem; color: #333;">0</strong>
                     </div>
-                    <div style="background: #1E1E1E; padding: 10px; border-radius: 6px;">
+                    <div style="background: #FFF; padding: 10px; border-radius: 6px; border: 1px solid #F3C6D8;">
                         <span style="color: #888; display: block; font-size: 0.8rem;">Faturamento Total</span>
                         <strong id="barber-resumo-total" style="font-size: 1.2rem; color: #25D366;">R$ 0,00</strong>
                     </div>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.95rem; margin-bottom: 15px;">
-                    <div style="background: #1E1E1E; padding: 10px; border-radius: 6px;">
+                    <div style="background: #FFF; padding: 10px; border-radius: 6px; border: 1px solid #F3C6D8;">
                         <span style="color: #888; display: block; font-size: 0.8rem;">Atendimentos Cancelados</span>
                         <strong id="barber-resumo-cancelados-qtd" style="font-size: 1.2rem; color: #e74c3c;">0</strong>
                     </div>
-                    <div style="background: #1E1E1E; padding: 10px; border-radius: 6px;">
+                    <div style="background: #FFF; padding: 10px; border-radius: 6px; border: 1px solid #F3C6D8;">
                         <span style="color: #888; display: block; font-size: 0.8rem;">Valor Cancelado</span>
                         <strong id="barber-resumo-cancelados-val" style="font-size: 1.2rem; color: #e74c3c;">R$ 0,00</strong>
                     </div>
                 </div>
-                <div style="background: #1E1E1E; padding: 12px; border-radius: 6px; font-size: 0.9rem; color: #CCC;" id="barber-detalhes-pagamento"></div>
+                <div style="background: #FFF; padding: 12px; border-radius: 6px; font-size: 0.9rem; color: #555; border: 1px solid #F3C6D8;" id="barber-detalhes-pagamento"></div>
             </div>
 
-            <h3 style="font-size: 1rem; margin-bottom: 10px; color: #D4AF37;">Lista de Horários</h3>
+            <h3 style="font-size: 1rem; margin-bottom: 10px; color: #d63384;">Lista de Horários</h3>
             <div id="agendamentos-list-barbeiro" style="display: flex; flex-direction: column; gap: 10px;"></div>
         </section>
 
         <!-- Seção de Resumo do Administrador -->
         <section id="dashboard-admin" class="section" style="display: none;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <h2>Resumo Administrativo</h2>
+                <h2 style="color: #d63384;">Resumo Administrativo</h2>
                 <div style="display: flex; gap: 8px;">
                     <button onclick="carregarResumoAdmin()" class="btn-whatsapp" style="width: auto; padding: 8px 15px; font-size: 0.9rem;">
                         <i class="fa-solid fa-rotate"></i> Atualizar
@@ -138,40 +140,40 @@
             </div>
 
             <!-- Cards de Resumo Geral -->
-            <div style="background: #332B15; border: 2px solid #D4AF37; padding: 15px; border-radius: 10px; margin-bottom: 25px;">
-                <h3 style="color: #D4AF37; margin-bottom: 10px; font-size: 1.1rem;">
+            <div style="background: #FDF2F8; border: 2px solid #d63384; padding: 15px; border-radius: 10px; margin-bottom: 25px;">
+                <h3 style="color: #d63384; margin-bottom: 10px; font-size: 1.1rem;">
                     <i class="fa-solid fa-chart-pie"></i> Fechamento Geral do Dia
                 </h3>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.95rem; margin-bottom: 15px;">
-                    <div style="background: #1E1E1E; padding: 10px; border-radius: 6px;">
+                    <div style="background: #FFF; padding: 10px; border-radius: 6px; border: 1px solid #F3C6D8;">
                         <span style="color: #888; display: block; font-size: 0.8rem;">Atendimentos Concluídos</span>
-                        <strong id="admin-resumo-qtd" style="font-size: 1.2rem; color: #FFF;">0</strong>
+                        <strong id="admin-resumo-qtd" style="font-size: 1.2rem; color: #333;">0</strong>
                     </div>
-                    <div style="background: #1E1E1E; padding: 10px; border-radius: 6px;">
+                    <div style="background: #FFF; padding: 10px; border-radius: 6px; border: 1px solid #F3C6D8;">
                         <span style="color: #888; display: block; font-size: 0.8rem;">Faturamento Total</span>
                         <strong id="admin-resumo-total" style="font-size: 1.2rem; color: #25D366;">R$ 0,00</strong>
                     </div>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.95rem; margin-bottom: 15px;">
-                    <div style="background: #1E1E1E; padding: 10px; border-radius: 6px;">
+                    <div style="background: #FFF; padding: 10px; border-radius: 6px; border: 1px solid #F3C6D8;">
                         <span style="color: #888; display: block; font-size: 0.8rem;">Atendimentos Cancelados</span>
                         <strong id="admin-resumo-cancelados-qtd" style="font-size: 1.2rem; color: #e74c3c;">0</strong>
                     </div>
-                    <div style="background: #1E1E1E; padding: 10px; border-radius: 6px;">
+                    <div style="background: #FFF; padding: 10px; border-radius: 6px; border: 1px solid #F3C6D8;">
                         <span style="color: #888; display: block; font-size: 0.8rem;">Valor Cancelado</span>
                         <strong id="admin-resumo-cancelados-val" style="font-size: 1.2rem; color: #e74c3c;">R$ 0,00</strong>
                     </div>
                 </div>
-                <div style="background: #1E1E1E; padding: 12px; border-radius: 6px; font-size: 0.9rem; color: #CCC;" id="admin-detalhes-pagamento"></div>
+                <div style="background: #FFF; padding: 12px; border-radius: 6px; font-size: 0.9rem; color: #555; border: 1px solid #F3C6D8;" id="admin-detalhes-pagamento"></div>
             </div>
 
-            <h3 style="font-size: 1rem; margin-bottom: 10px; color: #D4AF37;">Visão Geral dos Horários do Dia</h3>
+            <h3 style="font-size: 1rem; margin-bottom: 10px; color: #d63384;">Visão Geral dos Horários do Dia</h3>
             <div id="agendamentos-list-admin" style="display: flex; flex-direction: column; gap: 10px;"></div>
         </section>
 
     </div>
 
-    <!-- Modal de Confirmação Personalizada -->
+    <!-- Modal de Confirmação -->
     <div id="custom-confirm-modal" class="custom-modal-overlay">
         <div class="custom-modal">
             <h3 id="modal-title">Confirmação</h3>
@@ -207,7 +209,7 @@
             const senhaSalva = localStorage.getItem(`senha_${user.toLowerCase()}`);
             if (senhaSalva) return senhaSalva;
             if (user.toLowerCase() === 'admin') return 'admin123';
-            return user.toLowerCase() + '123';
+            return '1234'; 
         }
 
         function fazerLogin() {
@@ -216,7 +218,7 @@
             const hoje = new Date().toISOString().split("T")[0];
 
             if (!usuarioInput || !senhaInput) {
-                alert("Por favor, preencha o login e a senha.");
+                alert("Por favor, preencha o usuário e a senha.");
                 return;
             }
 
@@ -224,7 +226,7 @@
             const senhaCorreta = obterSenhaUsuario(usuarioInput);
 
             if (senhaInput !== senhaCorreta) {
-                alert("Login ou senha incorretos!");
+                alert("Usuário ou senha incorretos!");
                 return;
             }
 
@@ -238,8 +240,8 @@
                 document.getElementById("dashboard-admin").style.display = "block";
                 document.getElementById("filter-date-admin").value = hoje;
                 carregarResumoAdmin();
-            } else if (userLower === 'lucas' || userLower === 'pedro') {
-                usuarioLogado = userLower === 'lucas' ? 'Lucas' : 'Pedro';
+            } else if (userLower === 'ana' || userLower === 'juliana' || userLower === 'mariana') {
+                usuarioLogado = userLower.charAt(0).toUpperCase() + userLower.slice(1);
                 document.getElementById("login-section").style.display = "none";
                 document.getElementById("dashboard-admin").style.display = "none";
                 document.getElementById("dashboard-barbeiro").style.display = "block";
@@ -318,21 +320,25 @@
         }
 
         const precosTabela = {
-            "corte": 35, "corte de cabelo": 45, "barba": 35, "barba completa": 35,
-            "combo cabelo + barba": 70, "sobrancelha": 15, "acabamento": 15,
-            "pigmentacao": 35, "alisamento": 35, "hidratacao": 35,
-            "selagem": 70, "luzes": 90, "platinado": 120
+            "manicure simples": 30,
+            "pedicure": 35,
+            "alongamento em gel": 120,
+            "extensão de cílios fio a fio": 100,
+            "volume russo": 130,
+            "design de sobrancelha": 35,
+            "design com henna": 50,
+            "escova modelada": 60
         };
 
         function calcularPrecoServico(nomeServico) {
-            if (!nomeServico) return 35;
+            if (!nomeServico) return 30;
             const nomeNorm = normalizarTexto(nomeServico);
             if (precosTabela[nomeNorm]) return precosTabela[nomeNorm];
             let total = 0;
             nomeServico.split(",").forEach(parte => {
-                total += precosTabela[normalizarTexto(parte)] || 35;
+                total += precosTabela[normalizarTexto(parte)] || 30;
             });
-            return total > 0 ? total : 35;
+            return total > 0 ? total : 30;
         }
 
         async function carregarAgendamentos() {
@@ -344,10 +350,10 @@
             const lblCanceladosVal = document.getElementById("barber-resumo-cancelados-val");
             const lblDetalhes = document.getElementById("barber-detalhes-pagamento");
 
-            container.innerHTML = "<p style='color: #aaa; text-align: center;'>Carregando...</p>";
+            container.innerHTML = "<p style='color: #777; text-align: center;'>Carregando...</p>";
 
             try {
-                let query = _supabase.from("agendamentos").select("*").eq("barbeiro", usuarioLogado).order("horario", { ascending: true });
+                let query = _supabase.from("agendamento").select("*").eq("profissional", usuarioLogado).order("horario", { ascending: true });
                 if (dataFiltro) query = query.eq("data", dataFiltro);
 
                 const { data, error } = await query;
@@ -387,44 +393,45 @@
                 `;
 
                 if (data.length === 0) {
-                    container.innerHTML = "<p style='color: #aaa; text-align: center;'>Nenhum agendamento encontrado para esta data.</p>";
+                    container.innerHTML = "<p style='color: #777; text-align: center;'>Nenhum agendamento encontrado para esta data.</p>";
                     return;
                 }
 
                 container.innerHTML = "";
                 data.forEach(item => {
-                    const dataFormatada = item.data.split("-").reverse().join("/");
+                    const dataFormatada = item.data ? item.data.split("-").reverse().join("/") : '--/--/----';
                     let precoServico = calcularPrecoServico(item.servico);
                     const telefoneLimpo = item.telefone ? item.telefone.replace(/\D/g, '') : '';
-                    const mensagemLembrete = encodeURIComponent(`Olá, ${item.cliente}! Passando para lembrar do seu horário hoje às ${item.horario} (${item.servico}) na Prime. Te aguardamos aqui! ✂️`);
+                    const mensagemLembrete = encodeURIComponent(`Olá, ${item.cliente}! Passando para lembrar do seu horário hoje às ${item.horario} (${item.servico}) no Studio Bella. Te aguardamos aqui! 🌸`);
                     const linkZapCliente = telefoneLimpo ? `https://wa.me/55${telefoneLimpo}?text=${mensagemLembrete}` : `#`;
 
                     const isConcluido = item.status === 'concluido';
                     const isCancelado = item.status === 'cancelado';
                     const formaPagamentoAtual = item.pagamentos || '';
 
-                    let corBorda = "#D4AF37";
+                    let corBorda = "#d63384";
                     if (isConcluido) corBorda = "#25D366";
                     if (isCancelado) corBorda = "#e74c3c";
 
                     const card = document.createElement("div");
-                    card.style.background = "#2A2A2A";
+                    card.style.background = "#FAFAFA";
                     card.style.padding = "15px";
                     card.style.borderRadius = "8px";
+                    card.style.border = "1px solid #EAEAEA";
                     card.style.borderLeft = `4px solid ${corBorda}`;
                     
                     card.innerHTML = `
                         <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <strong style="color: #D4AF37; font-size: 1.05rem;"><i class="fa-regular fa-clock"></i> ${item.horario}</strong>
-                            <span style="font-size: 0.85rem; color: #888;">Data: ${dataFormatada}</span>
+                            <strong style="color: #d63384; font-size: 1.05rem;"><i class="fa-regular fa-clock"></i> ${item.horario}</strong>
+                            <span style="font-size: 0.85rem; color: #777;">Data: ${dataFormatada}</span>
                         </div>
-                        <p style="margin: 4px 0;"><strong>Cliente:</strong> ${item.cliente} ${isCancelado ? '<span style="color: #e74c3c; font-size: 0.85rem; font-weight: bold; margin-left: 8px;">(CANCELADO)</span>' : ''}</p>
-                        <p style="margin: 4px 0;"><strong>Telefone:</strong> ${item.telefone || 'Não informado'}</p>
-                        <p style="margin: 4px 0;"><strong>Serviço:</strong> ${item.servico} <span style="color: #25D366; float: right;">R$ ${precoServico},00</span></p>
+                        <p style="margin: 4px 0; color: #333;"><strong>Cliente:</strong> ${item.cliente} ${isCancelado ? '<span style="color: #e74c3c; font-size: 0.85rem; font-weight: bold; margin-left: 8px;">(CANCELADO)</span>' : ''}</p>
+                        <p style="margin: 4px 0; color: #555;"><strong>Telefone:</strong> ${item.telefone || 'Não informado'}</p>
+                        <p style="margin: 4px 0; color: #555;"><strong>Serviço:</strong> ${item.servico} <span style="color: #d63384; font-weight: bold; float: right;">R$ ${precoServico},00</span></p>
                         
-                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #444; display: flex; flex-direction: column; gap: 8px;">
+                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #EAEAEA; display: flex; flex-direction: column; gap: 8px;">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <label style="font-size: 0.85rem; color: #CCC;">Forma de Pagamento:</label>
+                                <label style="font-size: 0.85rem; color: #555;">Forma de Pagamento:</label>
                                 <select id="pagamento-${item.id}" style="width: 150px; padding: 5px; font-size: 0.85rem;" ${isCancelado ? 'disabled' : ''}>
                                     <option value="" ${!formaPagamentoAtual ? 'selected' : ''}>Selecione...</option>
                                     <option value="Dinheiro" ${formaPagamentoAtual === 'Dinheiro' ? 'selected' : ''}>Dinheiro</option>
@@ -435,7 +442,7 @@
                             </div>
                             
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px; gap: 6px;">
-                                <button onclick="confirmarExecucao('${item.id}', '${item.status || ''}')" style="background: ${isConcluido ? '#25D366' : '#1e1e1e'}; color: ${isConcluido ? '#000' : '#25D366'}; border: 2px solid #25D366; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 5px;" ${isCancelado ? 'disabled' : ''}>
+                                <button onclick="confirmarExecucao('${item.id}', '${item.status || ''}')" style="background: ${isConcluido ? '#25D366' : '#FDF2F8'}; color: ${isConcluido ? '#FFF' : '#d63384'}; border: 1px solid #d63384; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 5px;" ${isCancelado ? 'disabled' : ''}>
                                     <i class="fa-solid ${isConcluido ? 'fa-check-double' : 'fa-check'}"></i> ${isConcluido ? 'Concluído' : 'Confirmar'}
                                 </button>
                                 
@@ -443,7 +450,7 @@
                                     <i class="fa-brands fa-whatsapp"></i> Lembrete
                                 </button>
 
-                                <button onclick="cancelarAgendamento('${item.id}', '${item.status || ''}')" style="background: ${isCancelado ? '#666' : '#e74c3c'}; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 5px;">
+                                <button onclick="cancelarAgendamento('${item.id}', '${item.status || ''}')" style="background: ${isCancelado ? '#888' : '#e74c3c'}; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 5px;">
                                     <i class="fa-solid fa-ban"></i> ${isCancelado ? 'Ativar' : 'Cancelar'}
                                 </button>
                             </div>
@@ -453,7 +460,7 @@
                 });
             } catch (err) {
                 console.error("Erro ao carregar agenda:", err);
-                container.innerHTML = "<p style='color: #e74c3c; text-align: center;'>Erro ao carregar dados.</p>";
+                container.innerHTML = `<p style='color: #e74c3c; text-align: center;'>Erro: ${err.message || err}</p>`;
             }
         }
 
@@ -466,10 +473,10 @@
             const lblCanceladosVal = document.getElementById("admin-resumo-cancelados-val");
             const lblDetalhes = document.getElementById("admin-detalhes-pagamento");
 
-            container.innerHTML = "<p style='color: #aaa; text-align: center;'>Carregando...</p>";
+            container.innerHTML = "<p style='color: #777; text-align: center;'>Carregando...</p>";
 
             try {
-                let query = _supabase.from("agendamentos").select("*").order("horario", { ascending: true });
+                let query = _supabase.from("agendamento").select("*").order("horario", { ascending: true });
                 if (dataFiltro) query = query.eq("data", dataFiltro);
 
                 const { data, error } = await query;
@@ -509,41 +516,42 @@
                 `;
 
                 if (data.length === 0) {
-                    container.innerHTML = "<p style='color: #aaa; text-align: center;'>Nenhum registro encontrado para esta data.</p>";
+                    container.innerHTML = "<p style='color: #777; text-align: center;'>Nenhum registro encontrado para esta data.</p>";
                     return;
                 }
 
                 container.innerHTML = "";
                 data.forEach(item => {
-                    const dataFormatada = item.data.split("-").reverse().join("/");
+                    const dataFormatada = item.data ? item.data.split("-").reverse().join("/") : '--/--/----';
                     let precoServico = calcularPrecoServico(item.servico);
                     const isConcluido = item.status === 'concluido';
                     const isCancelado = item.status === 'cancelado';
 
-                    let corBorda = "#D4AF37";
+                    let corBorda = "#d63384";
                     if (isConcluido) corBorda = "#25D366";
                     if (isCancelado) corBorda = "#e74c3c";
 
                     const card = document.createElement("div");
-                    card.style.background = "#2A2A2A";
+                    card.style.background = "#FAFAFA";
                     card.style.padding = "12px 15px";
                     card.style.borderRadius = "8px";
+                    card.style.border = "1px solid #EAEAEA";
                     card.style.borderLeft = `4px solid ${corBorda}`;
                     
                     card.innerHTML = `
                         <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                            <strong style="color: #D4AF37;"><i class="fa-regular fa-clock"></i> ${item.horario} - Barbeiro: ${item.barbeiro}</strong>
-                            <span style="font-size: 0.8rem; color: #888;">${dataFormatada}</span>
+                            <strong style="color: #d63384;"><i class="fa-regular fa-clock"></i> ${item.horario} - Profissional: ${item.profissional || 'Não informado'}</strong>
+                            <span style="font-size: 0.8rem; color: #777;">${dataFormatada}</span>
                         </div>
-                        <p style="margin: 2px 0; font-size: 0.9rem;"><strong>Cliente:</strong> ${item.cliente} ${isCancelado ? '<span style="color: #e74c3c; font-size: 0.8rem;">(Cancelado)</span>' : isConcluido ? '<span style="color: #25D366; font-size: 0.8rem;">(Concluído)</span>' : ''}</p>
-                        <p style="margin: 2px 0; font-size: 0.9rem;"><strong>Serviço:</strong> ${item.servico} | <strong>Pagamento:</strong> ${item.pagamentos || 'Não informado'} <span style="color: #25D366; float: right;">R$ ${precoServico},00</span></p>
+                        <p style="margin: 2px 0; font-size: 0.9rem; color: #333;"><strong>Cliente:</strong> ${item.cliente} ${isCancelado ? '<span style="color: #e74c3c; font-size: 0.8rem;">(Cancelado)</span>' : isConcluido ? '<span style="color: #25D366; font-size: 0.8rem;">(Concluído)</span>' : ''}</p>
+                        <p style="margin: 2px 0; font-size: 0.9rem; color: #555;"><strong>Serviço:</strong> ${item.servico} | <strong>Pagamento:</strong> ${item.pagamentos || 'Não informado'} <span style="color: #d63384; font-weight: bold; float: right;">R$ ${precoServico},00</span></p>
                     `;
                     container.appendChild(card);
                 });
 
             } catch (err) {
                 console.error("Erro ao carregar resumo:", err);
-                container.innerHTML = "<p style='color: #e74c3c; text-align: center;'>Erro ao carregar resumo administrativo.</p>";
+                container.innerHTML = `<p style='color: #e74c3c; text-align: center;'>Erro: ${err.message || err}</p>`;
             }
         }
 
@@ -555,7 +563,7 @@
             const dadosUpdate = { status: novoStatus };
             if (formaPagamento) dadosUpdate.pagamentos = formaPagamento;
 
-            const { error } = await _supabase.from("agendamentos").update(dadosUpdate).eq("id", id);
+            const { error } = await _supabase.from("agendamento").update(dadosUpdate).eq("id", id);
             if (error) {
                 alert("Erro ao atualizar serviço: " + error.message);
             } else {
@@ -571,7 +579,7 @@
                 : "Deseja reativar este agendamento?";
 
             mostrarConfirmacao(titulo, mensagem, async () => {
-                const { error } = await _supabase.from("agendamentos").update({ status: novoStatus }).eq("id", id);
+                const { error } = await _supabase.from("agendamento").update({ status: novoStatus }).eq("id", id);
                 if (error) {
                     alert("Erro ao alterar status: " + error.message);
                 } else {
