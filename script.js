@@ -3,7 +3,7 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let selectedBarber = "Lucas";
+let selectedBarber = "Ana";
 let selectedServices = []; 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -91,9 +91,9 @@ async function checkAvailableTimes() {
 
     try {
         const { data: agendamentos, error } = await _supabase
-            .from("agendamentos")
+            .from("agendamento")
             .select("horario")
-            .eq("barbeiro", selectedBarber)
+            .eq("profissional", selectedBarber)
             .eq("data", selectedDate);
 
         if (error) throw error;
@@ -157,7 +157,7 @@ async function sendToWhatsapp() {
     }).join(", ");
 
     const formattedDate = date.split("-").reverse().join("/");
-    const whatsappNumber = "5531994951564";
+    const whatsappNumber = "31994951564";
 
     const message = `Olá! Gostaria de confirmar o meu agendamento:\n\n` +
                     `*Cliente:* ${name}\n` +
@@ -167,16 +167,16 @@ async function sendToWhatsapp() {
                     `*Data:* ${formattedDate}\n` +
                     `*Horário:* ${time}`;
 
-    const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const link = `https://wa.me/55${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
     try {
         const { error } = await _supabase
-            .from("agendamentos")
+            .from("agendamento")
             .insert([
                 {
                     cliente: name,
                     telefone: phone,
-                    barbeiro: selectedBarber,
+                    profissional: selectedBarber,
                     servico: listaNomesServicos,
                     data: date,
                     horario: time
